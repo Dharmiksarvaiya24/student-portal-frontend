@@ -54,8 +54,18 @@ export default {
         });
     },
     deleteUser(userId) {
-      console.log(`Deleting user  ${userId}`);
-    }
+      window.location.reload();
+      alert("User deleted !");
+    axios.delete(`http://localhost:8080/${userId}`)
+    .then(response => {
+      console.log('User deleted successfully:'); 
+    })
+    .catch(err => {
+      console.error(err); 
+    });
+    window.location.reload();
+}
+
   }
 }
 </script>
@@ -71,11 +81,10 @@ export default {
 .user-table td {
   border: 1px solid black;
   text-align: left;
-  padding: 8px;
+  padding: 5px;
 }
 
 img.delete-icon {
-  width: 40px;
-  cursor: pointer;
+  width: 30px;
 }
 </style>

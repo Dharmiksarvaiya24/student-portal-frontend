@@ -9,6 +9,7 @@
           <th>City</th>
           <th>Email</th>
           <th>Delete</th>
+          <th>Edit</th>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +24,13 @@
               alt="Delete" 
               class="delete-icon" 
               @click="deleteUser(user._id)">
+          </td>
+          <td>
+            <img 
+              src="https://w7.pngwing.com/pngs/65/893/png-transparent-edit-edit-document-edit-file-edited-editing-set-app-incredibles-icon-thumbnail.png" 
+              alt="Edit" 
+              class="edit-icon" 
+              @click="editUser(user)">
           </td>
         </tr>
       </tbody>
@@ -54,18 +62,21 @@ export default {
         });
     },
     deleteUser(userId) {
-      window.location.reload();
-      alert("User deleted !");
-    axios.delete(`http://localhost:8080/${userId}`)
-    .then(response => {
-      console.log('User deleted successfully:'); 
-    })
-    .catch(err => {
-      console.error(err); 
-    });
-    window.location.reload();
-}
-
+      axios.delete(`http://localhost:8080/${userId}`)
+        .then(response => {
+          console.log('User deleted successfully:', response.data);
+          alert("User deleted !");
+          this.getData(); // Refresh the user list after deletion
+        })
+        .catch(err => {
+          console.error('Error deleting user:', err);
+          alert("Failed to delete user. Please try again.");
+        });
+    },
+    editUser(user) {
+      console.log("Edit user:", user);
+      alert("You wnt to edit user !");
+    }
   }
 }
 </script>
@@ -84,7 +95,10 @@ export default {
   padding: 5px;
 }
 
-img.delete-icon {
+img.delete-icon{
   width: 30px;
+}
+img.edit-icon{
+  width: 40px;
 }
 </style>

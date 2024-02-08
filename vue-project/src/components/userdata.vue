@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>UserData List<br><br></h1>
+    <h1><center>UserData List</center><br></h1>
     <table class="user-table">
       <thead>
         <tr>
@@ -9,6 +9,7 @@
           <th>City</th>
           <th>Email</th>
           <th>Delete</th>
+          <th>Edit</th>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +24,13 @@
               alt="Delete" 
               class="delete-icon" 
               @click="deleteUser(user._id)">
+          </td>
+          <td>
+            <img 
+              src="https://w7.pngwing.com/pngs/65/893/png-transparent-edit-edit-document-edit-file-edited-editing-set-app-incredibles-icon-thumbnail.png" 
+              alt="Edit" 
+              class="edit-icon" 
+              @click="editUser(user)">
           </td>
         </tr>
       </tbody>
@@ -54,7 +62,19 @@ export default {
         });
     },
     deleteUser(userId) {
-      console.log(`Deleting user  ${userId}`);
+      alert("User deleted !");
+      window.location.reload();
+      axios.delete(`http://localhost:8080/${userId}`)
+        .then(response => {
+          console.log('User deleted successfully');
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    },
+    editUser(user) {
+      alert("You wnt to edit user !");
+      this.$router.push({ name: 'edit', params: { userId: user._id } });
     }
   }
 }
@@ -71,11 +91,13 @@ export default {
 .user-table td {
   border: 1px solid black;
   text-align: left;
-  padding: 8px;
+  padding: 5px;
 }
 
-img.delete-icon {
+img.delete-icon{
+  width: 30px;
+}
+img.edit-icon{
   width: 40px;
-  cursor: pointer;
 }
 </style>

@@ -11,6 +11,8 @@
 import Nav from './components/nav.vue'
 import add from './components/add.vue'
 import userdata from'./components/userdata.vue'
+import edit from './components/edit.vue'
+
 
 export default {
   name: 'App',
@@ -18,6 +20,7 @@ export default {
     Nav,
     add,
     userdata,
+    edit,
   }
 }
 </script>

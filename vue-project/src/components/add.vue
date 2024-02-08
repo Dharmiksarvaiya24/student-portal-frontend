@@ -4,6 +4,7 @@
         <div class="login">
           <div class="login-header">
             <img src="./login.png" height="50px" >
+            <h3>Add details</h3>
           </div>
         </div>
         <form class="login-form">

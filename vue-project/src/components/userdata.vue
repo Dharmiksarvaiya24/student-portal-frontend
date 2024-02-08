@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>UserData List<br><br></h1>
+    <h1><center>UserData List</center><br></h1>
     <table class="user-table">
       <thead>
         <tr>
@@ -62,20 +62,19 @@ export default {
         });
     },
     deleteUser(userId) {
+      alert("User deleted !");
+      window.location.reload();
       axios.delete(`http://localhost:8080/${userId}`)
         .then(response => {
-          console.log('User deleted successfully:', response.data);
-          alert("User deleted !");
-          this.getData(); // Refresh the user list after deletion
+          console.log('User deleted successfully');
         })
         .catch(err => {
-          console.error('Error deleting user:', err);
-          alert("Failed to delete user. Please try again.");
+          console.error(err);
         });
     },
     editUser(user) {
-      console.log("Edit user:", user);
       alert("You wnt to edit user !");
+      this.$router.push({ name: 'edit', params: { userId: user._id } });
     }
   }
 }

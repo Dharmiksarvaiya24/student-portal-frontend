@@ -1,64 +1,81 @@
 <template>
-    <div>
-      <h1>UserData List<br><br></h1>
-      <table class="user-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>City</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody id="tbody"></tbody>
-      </table>
-    </div>
-  </template>
-  
-  <script>
-  import axios from 'axios';
-  export default {
-    name: "UserData",
-    mounted() {
-      this.getData();
-    },
-    methods: {
-      getData() {
-        axios.get('http://localhost:8080/')
-        .then(res =>{
-            const data = res.data;
-            console.log(data);
+  <div>
+    <h1>UserData List<br><br></h1>
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>City</th>
+          <th>Email</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="user in users" :key="user._id">
+          <td>{{ user._id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.city }}</td>
+          <td>{{ user.email }}</td> 
+          <td>
+            <img 
+              src="https://w7.pngwing.com/pngs/953/119/png-transparent-computer-icons-delete-icon-cdr-angle-text-thumbnail.png" 
+              alt="Delete" 
+              class="delete-icon" 
+              @click="deleteUser(user._id)">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>
 
-            const userid = document.getElementById('tbody');
-            userid.innerHTML=data.map(user =>
-            `<tr>
-                    <td>${user._id}</td>
-                    <td>${user.name}</td>
-                    <td>${user.city}</td>
-                    <td>${user.email}</td>
-                </tr>`
-            ).join('');                                       
+<script>
+import axios from 'axios';
+
+export default {
+  name: "UserData",
+  data() {
+    return {
+      users: []
+    };
+  },
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      axios.get('http://localhost:8080/')
+        .then(res => {
+          this.users = res.data;
         })
-        .catch(err =>{
-            console.log(err);
-        })
-      }
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    deleteUser(userId) {
+      console.log(`Deleting user  ${userId}`);
     }
   }
-  </script>
-  
-  <style>
-  .user-table {
-    border-collapse: collapse;
-    width: 60%;
-    font-size: 20px;
-  }
-  
-  .user-table th,
-  .user-table td {
-    border: 1px solid black;
-    text-align: left;
-    padding: 8px;
-  }
-  </style>
-  
+}
+</script>
+
+<style>
+.user-table {
+  border-collapse: collapse;
+  width: 60%;
+  font-size: 20px;
+}
+
+.user-table th,
+.user-table td {
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+}
+
+img.delete-icon {
+  width: 40px;
+  cursor: pointer;
+}
+</style>

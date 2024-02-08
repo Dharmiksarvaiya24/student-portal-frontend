@@ -3,7 +3,7 @@
       <div class="form">
         <div class="login">
           <div class="login-header">
-            <img src="./login.png" height="100px">
+            <img src="./login.png" height="50px" >
           </div>
         </div>
         <form class="login-form">

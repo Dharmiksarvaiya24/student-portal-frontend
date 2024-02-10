@@ -2,7 +2,7 @@
   <div class="nav">
       <nav>
           <ul>
-          <li><a href=this.$router.push('/');>Home</a></li>
+          <router-link to="/" class="home">Home</router-link>
           <li class="center">User Data Management</li>
           </ul>
       </nav>
@@ -48,7 +48,7 @@
     list-style-type: none;
   }
   
-  li a {
+  .home {
     display: block;
     color: white;
     text-decoration: none;
@@ -57,7 +57,7 @@
     
   }
   
-  li a:hover {
+  .home:hover {
     background-color: orangered;
   }
   </style>

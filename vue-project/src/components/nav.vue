@@ -2,7 +2,7 @@
   <div class="nav">
       <nav>
           <ul>
-          <li><a href="http://localhost:5173/">Home</a></li>
+          <li><a href="this.$router.push('/');">Home</a></li>
           <li class="center">User Data Management</li>
           </ul>
       </nav>

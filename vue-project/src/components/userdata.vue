@@ -48,30 +48,35 @@ export default {
       users: []
     };
   },
+  created() {
+    this.getData();
+  },
   mounted() {
     this.getData();
   },
   methods: {
     getData() {
-      axios.get('http://localhost:8080/')
-        .then(res => {
-          this.users = res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
+  axios.get('http://35.175.228.206:8080/')
+    .then(res => {
+      this.users = res.data;
+      console.log('User data:', this.users); 
+    })
+    .catch(err => {
+      console.error('Error fetching user data:', err);
+    });
+},
     deleteUser(userId) {
+  axios.delete(`http://35.175.228.206:8080/${userId}`)
+    .then(response => {
       alert("User deleted !");
-      window.location.reload();
-      axios.delete(`http://localhost:8080/${userId}`)
-        .then(response => {
-          console.log('User deleted successfully');
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    },
+      this.users = this.users.filter(user => user._id !== userId);
+      console.log('User deleted successfully');
+    })
+    .catch(err => {
+      console.error(err);
+      alert("Failed to delete user.");
+    });
+},
     editUser(user) {
       alert("You wnt to edit user !");
       this.$router.push({ name: 'edit', params: { userId: user._id } });

@@ -37,7 +37,7 @@
     methods: {
       getUserData() {
         const userId = this.$route.params.userId;
-        axios.get(`http://localhost:8080/${userId}`)
+        axios.get(`http://35.175.228.206:8080/${userId}`)
           .then(res => {
             this.editedUser = res.data;
           })
@@ -47,14 +47,15 @@
       },
       editdata() {
         const userId = this.$route.params.userId;
-        axios.put(`http://localhost:8080/${userId}`, this.editedUser)
+        axios.put(`http://35.175.228.206:8080/${userId}`, this.editedUser)
           .then(response => {
             console.log('User updated successfully');
+            this.$router.push('/userdata');
           })
           .catch(err => {
             console.error(err);
           });
-          this.$router.push('/userdata');
+      
       },
       cancel() {
         this.$router.push('/userdata');

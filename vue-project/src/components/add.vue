@@ -29,7 +29,7 @@ export default {
       const city = document.getElementById('city').value;
 
       if (name && email && city) { 
-        axios.post('http://localhost:8080/', {
+        axios.post('http://35.175.228.206:8080/', {
           name: name,
           email: email,
           city: city

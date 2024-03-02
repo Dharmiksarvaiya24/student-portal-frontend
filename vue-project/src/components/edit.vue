@@ -50,12 +50,11 @@
         axios.put(`http://35.175.228.206:8080/${userId}`, this.editedUser)
           .then(response => {
             console.log('User updated successfully');
-            this.$router.push('/userdata');
           })
           .catch(err => {
             console.error(err);
           });
-      
+          this.$router.push('/userdata');
       },
       cancel() {
         this.$router.push('/userdata');
